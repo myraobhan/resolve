@@ -26,7 +26,7 @@ const HeroSection = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/assessment-form">
+            <Link to="/complaint-form">
               <Button size="lg" variant="secondary" className="text-primary hover:text-primary">
                 Start Your Complaint
               </Button>
