@@ -31,36 +31,36 @@ const ForumExplainer = () => {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Understanding Consumer Forums</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Understanding Consumer Forums</h2>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             India has a three-tier consumer protection system. We automatically determine the right forum based on your complaint value and location.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {forums.map((forum, index) => (
             <Card key={index} className="shadow-soft hover:shadow-medium transition-all duration-300 border-0 overflow-hidden">
-              <CardHeader className={`${forum.color} text-white p-6`}>
-                <div className="flex items-center justify-between mb-4">
-                  <forum.icon className="w-8 h-8" />
+              <CardHeader className={`${forum.color} text-white p-4 sm:p-6`}>
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <forum.icon className="w-6 h-6 sm:w-8 sm:h-8" />
                   <Badge variant="secondary" className="text-xs font-medium">
                     {forum.range}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl">{forum.title}</CardTitle>
+                <CardTitle className="text-lg sm:text-xl">{forum.title}</CardTitle>
               </CardHeader>
-              <CardContent className="p-6">
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+              <CardContent className="p-4 sm:p-6">
+                <p className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
                   {forum.description}
                 </p>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm text-foreground mb-3">Key Features:</h4>
+                  <h4 className="font-semibold text-xs sm:text-sm text-foreground mb-2 sm:mb-3">Key Features:</h4>
                   {forum.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-sm">
-                      <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                    <div key={featureIndex} className="flex items-center text-xs sm:text-sm">
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full mr-2 sm:mr-3"></div>
                       <span className="text-muted-foreground">{feature}</span>
                     </div>
                   ))}
@@ -70,10 +70,10 @@ const ForumExplainer = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <div className="bg-gradient-card p-8 rounded-lg shadow-soft max-w-4xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">Don't Worry About Choosing</h3>
-            <p className="text-muted-foreground text-lg">
+        <div className="mt-8 sm:mt-12 text-center">
+          <div className="bg-gradient-card p-6 sm:p-8 rounded-lg shadow-soft max-w-4xl mx-auto">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Don't Worry About Choosing</h3>
+            <p className="text-muted-foreground text-base sm:text-lg">
               Our system automatically identifies the correct consumer forum based on your complaint details. 
               You just need to provide the information, and we'll handle the rest.
             </p>

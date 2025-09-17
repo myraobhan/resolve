@@ -108,38 +108,39 @@ const ChatBot = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-4 sm:py-6 lg:py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
               AI Consumer Rights Assistant
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground px-2">
               Get instant answers about consumer complaints, legal procedures,
               and your rights
             </p>
           </div>
 
           <Card className="shadow-medium">
-            <CardHeader className="bg-gradient-primary text-white">
+            <CardHeader className="bg-gradient-primary text-white p-4 sm:p-6">
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Bot className="w-6 h-6 mr-2" />
-                  Chat with AI Assistant
+                  <Bot className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
+                  <span className="text-sm sm:text-base">Chat with AI Assistant</span>
                 </div>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleClearChat}
-                  className="text-white border-white bg-white text-primary"
+                  className="text-white border-white bg-white text-primary text-xs sm:text-sm"
                 >
-                  <RefreshCw className="w-4 h-4 mr-1" />
-                  Clear Chat
+                  <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Clear Chat</span>
+                  <span className="sm:hidden">Clear</span>
                 </Button>
               </CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="h-96 overflow-y-auto p-6 space-y-4">
+              <div className="h-80 sm:h-96 overflow-y-auto p-4 sm:p-6 space-y-4">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -150,7 +151,7 @@ const ChatBot = () => {
                     }`}
                   >
                     <div
-                      className={`max-w-[80%] rounded-lg p-4 ${
+                      className={`max-w-[85%] sm:max-w-[80%] rounded-lg p-3 sm:p-4 ${
                         message.sender === "user"
                           ? "bg-primary text-primary-foreground"
                           : "bg-secondary text-secondary-foreground"
@@ -158,13 +159,13 @@ const ChatBot = () => {
                     >
                       <div className="flex items-start space-x-2">
                         {message.sender === "bot" && (
-                          <Bot className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                          <Bot className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0" />
                         )}
                         {message.sender === "user" && (
-                          <User className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                          <User className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0" />
                         )}
                         <div className="flex-1">
-                          <p className="whitespace-pre-line">
+                          <p className="whitespace-pre-line text-sm sm:text-base">
                             {message.content}
                           </p>
                           <p className="text-xs opacity-70 mt-2">
@@ -197,9 +198,9 @@ const ChatBot = () => {
                 )}
               </div>
 
-              <div className="p-6 border-t">
+              <div className="p-4 sm:p-6 border-t">
                 <div className="mb-4">
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-2">
                     Quick questions:
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -209,7 +210,7 @@ const ChatBot = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => setInputMessage(question)}
-                        className="text-xs"
+                        className="text-xs sm:text-sm"
                       >
                         {question}
                       </Button>
@@ -217,17 +218,19 @@ const ChatBot = () => {
                   </div>
                 </div>
 
-                <div className="flex space-x-2">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                   <Input
                     placeholder="Ask me about consumer rights, complaint procedures, or legal advice..."
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                     disabled={isLoading}
+                    className="flex-1"
                   />
                   <Button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputMessage.trim()}
+                    className="w-full sm:w-auto"
                   >
                     <Send className="w-4 h-4" />
                   </Button>
@@ -236,14 +239,14 @@ const ChatBot = () => {
             </CardContent>
           </Card>
 
-          <div className="mt-8 bg-warning/10 border border-warning/20 rounded-lg p-6">
+          <div className="mt-6 sm:mt-8 bg-warning/10 border border-warning/20 rounded-lg p-4 sm:p-6">
             <div className="flex items-start space-x-3">
-              <AlertCircle className="w-6 h-6 text-warning flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-warning flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-semibold text-warning mb-2">
+                <h3 className="font-semibold text-warning mb-2 text-sm sm:text-base">
                   Important Disclaimer
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   This AI assistant provides general guidance about consumer
                   rights and procedures in India. It is not a substitute for
                   professional legal advice. For complex cases, consider

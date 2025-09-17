@@ -121,32 +121,32 @@ const ComplaintForm = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-4 sm:py-6 lg:py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
               Consumer Complaint Form
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground px-2">
               Generate a professional complaint form for consumer disputes
             </p>
           </div>
 
           <Card className="shadow-medium">
-            <CardHeader className="bg-gradient-primary text-white">
-              <CardTitle className="flex items-center">
-                <FileText className="w-6 h-6 mr-2" />
+            <CardHeader className="bg-gradient-primary text-white p-4 sm:p-6">
+              <CardTitle className="flex items-center text-sm sm:text-base">
+                <FileText className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
                 Complaint Form Generator
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <CardContent className="p-4 sm:p-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Forum Type Display */}
                 {formData.totalValue && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
                     <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-blue-600 mr-2" />
-                      <span className="font-semibold text-blue-800">
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 mr-2" />
+                      <span className="font-semibold text-blue-800 text-sm sm:text-base">
                         Recommended Forum: {getForumType()}
                       </span>
                     </div>
@@ -154,12 +154,12 @@ const ComplaintForm = () => {
                 )}
 
                 {/* Location Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Location Information
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="district">District *</Label>
                       <Input
@@ -188,12 +188,12 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Complainant Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Complainant Information
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="complainantName">Full Name *</Label>
                       <Input
@@ -248,8 +248,8 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Opposite Party Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Opposite Party Information
                   </h3>
 
@@ -303,12 +303,12 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Transaction Details */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Transaction Details
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="totalValue">
                         Total Claim Value (₹) *
@@ -336,7 +336,7 @@ const ComplaintForm = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="transactionDate">
                         Date of Transaction *
@@ -410,8 +410,8 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Issue Details */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Issue Details
                   </h3>
 
@@ -483,12 +483,12 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Relief Sought */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Relief Sought
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="refundAmount">Refund Amount (₹)</Label>
                       <Input
@@ -520,12 +520,12 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Declaration */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold border-b pb-2">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold border-b pb-2">
                     Declaration
                   </h3>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <Label htmlFor="declarationDate">
                         Declaration Date *
@@ -557,21 +557,21 @@ const ComplaintForm = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div className="flex justify-center pt-6">
+                <div className="flex justify-center pt-4 sm:pt-6">
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="px-8 py-3 text-lg"
+                    className="px-6 sm:px-8 py-3 text-base sm:text-lg w-full sm:w-auto"
                   >
                     {isLoading ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Generating PDF...
+                        <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-2"></div>
+                        <span className="text-sm sm:text-base">Generating PDF...</span>
                       </>
                     ) : (
                       <>
-                        <Download className="w-5 h-5 mr-2" />
-                        Generate Complaint PDF
+                        <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                        <span className="text-sm sm:text-base">Generate Complaint PDF</span>
                       </>
                     )}
                   </Button>
@@ -581,14 +581,14 @@ const ComplaintForm = () => {
           </Card>
 
           {/* Important Information */}
-          <div className="mt-8 bg-warning/10 border border-warning/20 rounded-lg p-6">
+          <div className="mt-6 sm:mt-8 bg-warning/10 border border-warning/20 rounded-lg p-4 sm:p-6">
             <div className="flex items-start space-x-3">
-              <AlertCircle className="w-6 h-6 text-warning flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-warning flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-semibold text-warning mb-2">
+                <h3 className="font-semibold text-warning mb-2 text-sm sm:text-base">
                   Important Information
                 </h3>
-                <ul className="text-sm text-muted-foreground space-y-1">
+                <ul className="text-xs sm:text-sm text-muted-foreground space-y-1">
                   <li>
                     • This form generates a professional complaint document
                     based on the Consumer Protection Act, 2019

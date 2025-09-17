@@ -42,27 +42,27 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-20 bg-secondary/30">
+    <section className="py-12 sm:py-16 lg:py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Frequently Asked Questions</h2>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Get answers to common questions about consumer complaints and the filing process.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-card rounded-lg shadow-soft border-0 px-6"
+                className="bg-card rounded-lg shadow-soft border-0 px-4 sm:px-6"
               >
-                <AccordionTrigger className="text-left hover:no-underline py-6">
-                  <span className="text-lg font-medium">{faq.question}</span>
+                <AccordionTrigger className="text-left hover:no-underline py-4 sm:py-6">
+                  <span className="text-base sm:text-lg font-medium">{faq.question}</span>
                 </AccordionTrigger>
-                <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
+                <AccordionContent className="pb-4 sm:pb-6 text-muted-foreground leading-relaxed text-sm sm:text-base">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
