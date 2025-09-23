@@ -3,6 +3,7 @@ import Footer from "@/components/common/Footer";
 import HeroSection from "@/components/homepage/HeroSection";
 import HowItWorks from "@/components/homepage/HowItWorks";
 import ForumExplainer from "@/components/homepage/ForumExplainer";
+import LegalDocuments from "@/components/homepage/LegalDocuments";
 import FAQ from "@/components/homepage/FAQ";
 
 const Homepage = () => {
@@ -13,6 +14,7 @@ const Homepage = () => {
         <HeroSection />
         <HowItWorks />
         <ForumExplainer />
+        <LegalDocuments />
         <FAQ />
       </main>
       <Footer />
