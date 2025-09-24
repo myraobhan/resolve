@@ -198,7 +198,7 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
         </div>
       </div>
 
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px; page-break-before: always; margin-top: 60px;">
         <div style="font-weight: bold; margin-bottom: 8px;">3. Cause of Action</div>
         <div style="margin-left: 20px; text-align: justify;">
           The cause of action arose on ${data.causeOfActionDate}, when the product/service was found to be defective/deficient and the opposite party failed to respond or rectify the issue, leading to inconvenience, financial loss, and mental harassment.
