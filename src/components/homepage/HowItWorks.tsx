@@ -29,7 +29,7 @@ const HowItWorks = () => {
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">How It Works</h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-            Filing a consumer complaint has never been easier. Follow these simple steps to get justice.
+            Filing a consumer complaint has never been easier. Follow these simple steps in your quest to get justice.
           </p>
         </div>
 

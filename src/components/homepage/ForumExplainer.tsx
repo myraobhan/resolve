@@ -75,7 +75,7 @@ const ForumExplainer = () => {
             <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Don't Worry About Choosing</h3>
             <p className="text-muted-foreground text-base sm:text-lg">
               Our system automatically identifies the correct consumer forum based on your complaint details. 
-              You just need to provide the information, and we'll handle the rest.
+              You just need to provide the information, and we will handle the rest.
             </p>
           </div>
         </div>

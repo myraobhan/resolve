@@ -13,15 +13,15 @@ const FAQ = () => {
     },
     {
       question: "How much does it cost to file a complaint?",
-      answer: "The fee varies by forum: District Forum charges ₹200 for complaints up to ₹20 lakh, ₹400 for ₹20 lakh to ₹1 crore. State Commission charges ₹500 for ₹1-10 crore complaints. National Commission charges ₹5000 for complaints above ₹10 crore."
+      answer: "The fee varies by forum: District Forum's charge ₹200 for complaints up to ₹20 lakh, ₹400 for ₹20 lakh to ₹1 crore. State Commissions charge ₹500 for ₹1-10 crore complaints. The National Commission charges ₹5000 for complaints above ₹10 crore."
     },
     {
       question: "What documents do I need to file a complaint?",
-      answer: "You'll need purchase receipts, warranty cards, correspondence with the seller/service provider, photographs of defects (if applicable), and any other relevant documents that support your case."
+      answer: "You will need purchase receipts, warranty cards, correspondence with the seller/service provider, photographs of defects (if applicable), and any other relevant documents that support your case."
     },
     {
       question: "How long does the complaint process take?",
-      answer: "District Forums typically resolve cases within 3-5 months, State Commissions within 5-6 months, and National Commission within 6-8 months. However, timeline can vary based on case complexity."
+      answer: "District Forums typically resolve cases within 3-5 months, State Commissions within 5-6 months, and the National Commission within 6-8 months. However, timeline can vary based on case complexity."
     },
     {
       question: "Can I file a complaint after a long time has passed?",
@@ -33,7 +33,7 @@ const FAQ = () => {
     },
     {
       question: "Is this platform officially affiliated with consumer forums?",
-      answer: "No, we are an independent service that helps you prepare and file complaints. The generated documents comply with legal requirements, but you'll need to submit them to the appropriate forum yourself."
+      answer: "No, we are an independent service that helps you prepare and file complaints. You will need to submit the generate document to the appropriate forum yourself."
     },
     {
       question: "What compensation can I expect?",
