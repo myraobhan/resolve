@@ -38,6 +38,29 @@ const HeroSection = () => {
             </Link>
           </div>
 
+          {/* E-Jagriti Portal Link */}
+          <div className="mb-8 sm:mb-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-2xl mx-auto">
+              <div className="flex items-center justify-center mb-3">
+                <Shield className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
+                <span className="text-sm sm:text-base font-semibold">Official Government Portal</span>
+              </div>
+              <p className="text-xs sm:text-sm opacity-90 mb-4 text-center">
+                File complaints directly with the National Consumer Disputes Redressal Commission
+              </p>
+              <div className="flex justify-center">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="text-white border-white bg-white/20 hover:bg-white/30"
+                  onClick={() => window.open('https://e-jagriti.gov.in/', '_blank', 'noopener,noreferrer')}
+                >
+                  Visit E-Jagriti Portal
+                </Button>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16">
             <div className="flex flex-col items-center text-center px-4">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mb-3 sm:mb-4">

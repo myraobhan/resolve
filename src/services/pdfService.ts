@@ -19,7 +19,10 @@ interface ComplaintFormData {
   communicationAttempts: string;
   supportingDocuments: string;
   causeOfActionDate: string;
-  refundAmount: string;
+  causeOfActionPlace: string;
+  filingPlace: string;
+  reliefType: string;
+  reliefAmount: string;
   compensationAmount: string;
   declarationDate: string;
   declarationPlace: string;
@@ -117,6 +120,26 @@ export const generateComplaintPDF = async (complaintData: ComplaintFormData) => 
   }
 };
 
+const getReliefDescription = (reliefType: string, reliefAmount: string, compensationAmount: string) => {
+  const reliefAmountText = reliefAmount ? `₹${reliefAmount}` : '';
+  const compensationAmountText = compensationAmount ? `₹${compensationAmount}` : '';
+  
+  switch (reliefType) {
+    case 'replacement':
+      return `• Replacement of the product/service of value ${reliefAmountText}${compensationAmountText ? `, and<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss` : ''}`;
+    case 'refund':
+      return `• Refund of ${reliefAmountText}${compensationAmountText ? `, and<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss` : ''}`;
+    case 'return_with_refund':
+      return `• Return of the product and refund of ${reliefAmountText}${compensationAmountText ? `, and<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss` : ''}`;
+    case 'compensation_only':
+      return `• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss`;
+    case 'multiple':
+      return `• Relief as specified: ${reliefAmountText}${compensationAmountText ? `, and<br>• Additional compensation of ${compensationAmountText}` : ''}`;
+    default:
+      return `• Refund of ${reliefAmountText}, or<br>• Replacement of the product/service, or<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss`;
+  }
+};
+
 const createComplaintHTML = (data: ComplaintFormData, forumName: string, commissionType: string, location: string) => {
   return `
     <div style="font-family: 'Times New Roman', serif; line-height: 1.6; color: #333;">
@@ -201,7 +224,7 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
       <div style="margin-bottom: 20px; page-break-before: always; margin-top: 60px;">
         <div style="font-weight: bold; margin-bottom: 8px;">3. Cause of Action</div>
         <div style="margin-left: 20px; text-align: justify;">
-          The cause of action arose on ${data.causeOfActionDate}, when the product/service was found to be defective/deficient and the opposite party failed to respond or rectify the issue, leading to inconvenience, financial loss, and mental harassment.
+          The cause of action arose on ${data.causeOfActionDate} at ${data.causeOfActionPlace}, when the product/service was found to be defective/deficient and the opposite party failed to respond or rectify the issue, leading to inconvenience, financial loss, and mental harassment. The complaint is being filed at ${data.filingPlace}.
         </div>
       </div>
 
@@ -209,9 +232,7 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
         <div style="font-weight: bold; margin-bottom: 8px;">4. Reliefs Sought</div>
         <div style="margin-left: 20px; text-align: justify;">
           The complainant prays for the following reliefs:<br>
-          • Refund of ₹${data.refundAmount}, or<br>
-          • Replacement of the product/service, or<br>
-          • Compensation of ₹${data.compensationAmount} for inconvenience, mental agony, and loss, and<br>
+          ${getReliefDescription(data.reliefType, data.reliefAmount, data.compensationAmount)}<br>
           • Any other relief deemed just and proper by this Hon'ble Forum.
         </div>
       </div>
