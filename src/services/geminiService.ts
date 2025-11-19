@@ -15,7 +15,7 @@ const removeMarkdown = (text: string): string => {
 
 const CONSUMER_RIGHTS_SYSTEM_PROMPT = `You are an expert AI assistant specializing in Indian consumer rights, legal procedures, and user rights. Your role is to help users understand their consumer rights under the Consumer Protection Act, 2019, guide them through complaint procedures, and provide accurate information about consumer forums.`;
 
-const genAI = new GoogleGenerativeAI("AIzaSyBJR3nzrC-IA9PdWPph1JHdusqCPHdOANE");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 const model = genAI.getGenerativeModel({ 
   model: "gemini-2.0-flash",
   generationConfig: {

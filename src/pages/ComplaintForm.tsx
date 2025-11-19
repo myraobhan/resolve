@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,8 @@ import {
 import { FileText, Download, AlertCircle, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generateComplaintPDF } from "@/services/pdfService";
+import { logFormDownload, getTotalDownloads } from "@/services/firebaseAnalyticsService";
+import { fetchStates, fetchDistricts, type State, type District } from "@/services/locationService";
 
 interface ComplaintFormData {
   complainantName: string;
@@ -79,6 +81,94 @@ const ComplaintForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+  const [totalDownloads, setTotalDownloads] = useState<number>(0);
+  
+  // Location API state
+  const [states, setStates] = useState<State[]>([]);
+  const [districts, setDistricts] = useState<District[]>([]);
+  const [selectedStateId, setSelectedStateId] = useState<number | null>(null);
+  const [loadingStates, setLoadingStates] = useState(false);
+  const [loadingDistricts, setLoadingDistricts] = useState(false);
+  const [showCustomDistrict, setShowCustomDistrict] = useState(false);
+  const [customDistrict, setCustomDistrict] = useState("");
+
+  // Load states on component mount
+  useEffect(() => {
+    let mounted = true;
+    const loadStates = async () => {
+      setLoadingStates(true);
+      try {
+        const statesData = await fetchStates();
+        if (mounted) {
+          setStates(statesData);
+        }
+      } catch (error) {
+        console.error("Error loading states:", error);
+        if (mounted) {
+          toast({
+            title: "Error",
+            description: "Failed to load states. Please refresh the page.",
+            variant: "destructive",
+          });
+        }
+      } finally {
+        if (mounted) setLoadingStates(false);
+      }
+    };
+
+    loadStates();
+    return () => { mounted = false };
+  }, [toast]);
+
+  // Load districts when state is selected
+  useEffect(() => {
+    let mounted = true;
+    const loadDistricts = async () => {
+      if (!selectedStateId) {
+        setDistricts([]);
+        return;
+      }
+
+      setLoadingDistricts(true);
+      try {
+        const districtsData = await fetchDistricts(selectedStateId);
+        if (mounted) {
+          setDistricts(districtsData);
+        }
+      } catch (error) {
+        console.error("Error loading districts:", error);
+        if (mounted) {
+          toast({
+            title: "Error",
+            description: "Failed to load districts. Please try selecting the state again.",
+            variant: "destructive",
+          });
+        }
+      } finally {
+        if (mounted) setLoadingDistricts(false);
+      }
+    };
+
+    loadDistricts();
+    return () => { mounted = false };
+  }, [selectedStateId, toast]);
+
+  // Load total downloads count
+  useEffect(() => {
+    let mounted = true;
+    const loadCount = async () => {
+      try {
+        const count = await getTotalDownloads();
+        if (mounted) setTotalDownloads(count);
+      } catch (error) {
+        console.error("Error loading total downloads:", error);
+      }
+    };
+
+    loadCount();
+    return () => { mounted = false };
+  }, []);
+
   // Helper function to get date validation message
   const getDateValidationMessage = () => {
     if (formData.transactionDate && formData.causeOfActionDate) {
@@ -105,6 +195,38 @@ const ComplaintForm = () => {
       ...prev,
       [field]: value,
     }));
+  };
+
+  // Handle state selection
+  const handleStateChange = (stateName: string) => {
+    const selectedState = states.find(s => s.state_name === stateName);
+    if (selectedState) {
+      setSelectedStateId(selectedState.state_id);
+      handleInputChange("state", stateName);
+      // Reset district when state changes
+      handleInputChange("district", "");
+      setShowCustomDistrict(false);
+      setCustomDistrict("");
+    }
+  };
+
+  // Handle district selection
+  const handleDistrictChange = (districtName: string) => {
+    if (districtName === "OTHER") {
+      setShowCustomDistrict(true);
+      handleInputChange("district", "");
+      setCustomDistrict("");
+    } else {
+      setShowCustomDistrict(false);
+      handleInputChange("district", districtName);
+      setCustomDistrict("");
+    }
+  };
+
+  // Handle custom district input
+  const handleCustomDistrictChange = (value: string) => {
+    setCustomDistrict(value);
+    handleInputChange("district", value);
   };
 
   const validateForm = () => {
@@ -151,6 +273,24 @@ const ComplaintForm = () => {
       const result = await generateComplaintPDF(formData);
 
       if (result.success) {
+        // Log the download to Firebase
+        await logFormDownload({
+          complainantName: formData.complainantName,
+          oppositePartyName: formData.oppositePartyName,
+          forumType: getForumType(),
+          totalValue: formData.totalValue,
+          district: formData.district,
+          state: formData.state,
+        });
+
+        // Refresh local counter
+        try {
+          const newTotal = await getTotalDownloads();
+          setTotalDownloads(newTotal);
+        } catch (err) {
+          console.error('Error refreshing total downloads:', err);
+        }
+
         toast({
           title: "Success!",
           description: "Your complaint form has been generated and downloaded.",
@@ -195,6 +335,13 @@ const ComplaintForm = () => {
             </p>
           </div>
 
+          <div className="flex justify-end mb-4">
+            <div className="bg-white border border-gray-100 rounded-lg px-4 py-2 shadow-sm text-right">
+              <div className="text-xs text-muted-foreground">Total Forms Downloaded</div>
+              <div className="text-xl font-semibold">{totalDownloads}</div>
+            </div>
+          </div>
+
           <Card className="shadow-medium">
             <CardHeader className="bg-gradient-primary text-white p-4 sm:p-6">
               <CardTitle className="flex items-center text-sm sm:text-base">
@@ -224,28 +371,74 @@ const ComplaintForm = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <Label htmlFor="district">District *</Label>
-                      <Input
-                        id="district"
-                        value={formData.district}
-                        onChange={(e) =>
-                          handleInputChange("district", e.target.value)
-                        }
-                        placeholder="e.g., Mumbai"
-                        required
-                      />
+                      <Label htmlFor="state">State *</Label>
+                      <Select
+                        value={formData.state}
+                        onValueChange={handleStateChange}
+                        disabled={loadingStates}
+                      >
+                        <SelectTrigger id="state" className="w-full">
+                          <SelectValue placeholder={loadingStates ? "Loading states..." : "Select state"} />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[300px]">
+                          {states.map((state) => (
+                            <SelectItem key={state.state_id} value={state.state_name}>
+                              {state.state_name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                     <div>
-                      <Label htmlFor="state">State *</Label>
-                      <Input
-                        id="state"
-                        value={formData.state}
-                        onChange={(e) =>
-                          handleInputChange("state", e.target.value)
-                        }
-                        placeholder="e.g., Maharashtra"
-                        required
-                      />
+                      <Label htmlFor="district">District *</Label>
+                      <Select
+                        value={showCustomDistrict ? "OTHER" : formData.district}
+                        onValueChange={handleDistrictChange}
+                        disabled={!formData.state || loadingDistricts}
+                      >
+                        <SelectTrigger id="district" className="w-full">
+                          <SelectValue 
+                            placeholder={
+                              !formData.state 
+                                ? "Select state first" 
+                                : loadingDistricts 
+                                ? "Loading districts..." 
+                                : "Select district"
+                            } 
+                          />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[300px]">
+                          {districts.map((district) => (
+                            <SelectItem key={district.district_id} value={district.district_name}>
+                              {district.district_name}
+                            </SelectItem>
+                          ))}
+                          {formData.state && (
+                            <SelectItem value="OTHER" className="font-semibold text-primary">
+                              ✏️ Other (Type manually)
+                            </SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
+                      {!formData.state && (
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Please select a state first
+                        </p>
+                      )}
+                      {showCustomDistrict && (
+                        <div className="mt-2">
+                          <Input
+                            placeholder="Type your district name"
+                            value={customDistrict}
+                            onChange={(e) => handleCustomDistrictChange(e.target.value)}
+                            className="w-full"
+                            required
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Enter the district name manually
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -348,21 +541,7 @@ const ComplaintForm = () => {
                     />
                   </div>
 
-                  <div>
-                    <Label htmlFor="oppositePartyContact">
-                      Phone/Email (if available)
-                    </Label>
-                    <Input
-                      id="oppositePartyContact"
-                      value={formData.oppositePartyContact}
-                      onChange={(e) =>
-                        handleInputChange(
-                          "oppositePartyContact",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
+                  
                 </div>
 
                  {/* Transaction Details */}

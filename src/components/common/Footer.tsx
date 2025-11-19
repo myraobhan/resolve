@@ -20,14 +20,8 @@ const Footer = () => {
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 <span>Serving consumers across India</span>
               </div>
-              <div className="flex items-center text-xs sm:text-sm text-primary-foreground/80">
-                <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                <span>support@consumerassist.in</span>
-              </div>
-              <div className="flex items-center text-xs sm:text-sm text-primary-foreground/80">
-                <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                <span>1800-XXX-XXXX (Toll Free)</span>
-              </div>
+              
+              
             </div>
           </div>
 
@@ -56,7 +50,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/20 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center">
           <div className="text-xs sm:text-sm text-primary-foreground/80 mb-4 sm:mb-0 text-center sm:text-left">
-            © 2024 ConsumerAssist. All rights reserved. | Made with ❤️ for Indian consumers
+            © 2025 ConsumerAssist. All rights reserved. | Made with ❤️ for Indian consumers
           </div>
         </div>
       </div>

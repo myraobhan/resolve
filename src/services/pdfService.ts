@@ -185,7 +185,6 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
             <span style="margin-left: 20px;">${data.oppositePartyAddress}</span>
           </div>
           <div style="margin-bottom: 8px;">
-            <span style="font-weight: bold;">Phone/Email:</span>
             <span style="margin-left: 20px;">${data.oppositePartyContact}</span>
           </div>
         </div>
@@ -193,16 +192,16 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
 
       <div style="text-align: center; font-weight: bold; font-size: 16px; margin: 30px 0 20px 0; text-decoration: underline;">COMPLAINT UNDER SECTION 35 OF THE CONSUMER PROTECTION ACT, 2019</div>
 
-      <div style="margin-bottom: 20px;">
-        <div style="font-weight: bold; margin-bottom: 8px;">1. Jurisdiction</div>
-        <div style="margin-left: 20px; text-align: justify;">
+      <div style="margin-bottom: 18px;">
+        <div style="font-weight: bold; margin-bottom: 6px;">1. Jurisdiction</div>
+        <div style="margin-left: 20px; text-align: justify; line-height: 1.5;">
           The complainant submits that this Hon'ble Forum has territorial jurisdiction to entertain the present complaint as the cause of action arose within its jurisdiction, and/or the opposite party resides or carries on business within this jurisdiction. The pecuniary jurisdiction is also established as the value of the goods/services and compensation claimed is ₹${data.totalValue}.
         </div>
       </div>
 
-      <div style="margin-bottom: 20px;">
-        <div style="font-weight: bold; margin-bottom: 8px;">2. Facts of the Case</div>
-        <div style="margin-left: 20px; text-align: justify;">
+      <div style="margin-bottom: 18px;">
+        <div style="font-weight: bold; margin-bottom: 6px;">2. Facts of the Case</div>
+        <div style="margin-left: 20px; text-align: justify; line-height: 1.5;">
           The complainant purchased/availed the following product/service:<br><br>
           <strong>Product/Service Description:</strong> ${data.productDescription}<br>
           <strong>Date of transaction:</strong> ${data.transactionDate}<br>
@@ -221,25 +220,25 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
         </div>
       </div>
 
-      <div style="margin-bottom: 20px; page-break-before: always; margin-top: 60px;">
-        <div style="font-weight: bold; margin-bottom: 8px;">3. Cause of Action</div>
-        <div style="margin-left: 20px; text-align: justify;">
+      <div style="margin-bottom: 18px; margin-top: 15px; page-break-inside: avoid;">
+        <div style="font-weight: bold; margin-bottom: 6px;">3. Cause of Action</div>
+        <div style="margin-left: 20px; text-align: justify; line-height: 1.5;">
           The cause of action arose on ${data.causeOfActionDate} at ${data.causeOfActionPlace}, when the product/service was found to be defective/deficient and the opposite party failed to respond or rectify the issue, leading to inconvenience, financial loss, and mental harassment. The complaint is being filed at ${data.filingPlace}.
         </div>
       </div>
 
-      <div style="margin-bottom: 20px;">
-        <div style="font-weight: bold; margin-bottom: 8px;">4. Reliefs Sought</div>
-        <div style="margin-left: 20px; text-align: justify;">
+      <div style="margin-bottom: 18px; page-break-before: always; margin-top: 60px; page-break-inside: avoid;">
+        <div style="font-weight: bold; margin-bottom: 6px;">4. Reliefs Sought</div>
+        <div style="margin-left: 20px; text-align: justify; line-height: 1.5;">
           The complainant prays for the following reliefs:<br>
           ${getReliefDescription(data.reliefType, data.reliefAmount, data.compensationAmount)}<br>
           • Any other relief deemed just and proper by this Hon'ble Forum.
         </div>
       </div>
 
-      <div style="margin-bottom: 20px;">
-        <div style="font-weight: bold; margin-bottom: 8px;">5. Declaration and Verification</div>
-        <div style="margin-left: 20px; text-align: justify;">
+      <div style="margin-bottom: 18px; page-break-inside: avoid;">
+        <div style="font-weight: bold; margin-bottom: 6px;">5. Declaration and Verification</div>
+        <div style="margin-left: 20px; text-align: justify; line-height: 1.5;">
           I, ${data.complainantName}, the complainant herein, do hereby declare that the facts stated above are true to the best of my knowledge and belief, and no part of it is false or concealed.
         </div>
       </div>
