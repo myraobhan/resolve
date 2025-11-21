@@ -45,7 +45,7 @@ export const fetchStates = async (): Promise<State[]> => {
     // Cache the results
     statesCache = sortedStates;
     
-    cosole.log('✅ States loaded from country-state-city:', sortedStates.length);
+    console.log('✅ States loaded from country-state-city:', sortedStates.length);
     return sortedStates;
   } catch (error) {
     console.error('❌ Error fetching states:', error);
