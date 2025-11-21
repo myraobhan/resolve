@@ -40,11 +40,11 @@ const LegalDocuments = () => {
       icon: Globe
     },
     {
-      id: "india-gov-ejagriti",
-      title: "E-Jagriti - India.gov.in",
-      description: "Official government information about the E-Jagriti online consumer complaint filing system.",
-      url: "https://www.india.gov.in/content/e-jagriti",
-      type: "Government Info",
+      id: "national-consumer-helpline",
+      title: "National Consumer Helpline (NCH)",
+      description: "Access the National Consumer Helpline service for assistance with consumer complaints and grievances.",
+      url: "https://services.india.gov.in/service/detail/national-consumer-helpline-nch",
+      type: "Government Service",
       icon: Shield
     },
     {
