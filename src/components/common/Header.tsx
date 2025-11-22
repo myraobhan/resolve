@@ -47,7 +47,7 @@ const Header = () => {
               location.pathname === "/complaint-form" ? "text-primary" : "text-muted-foreground"
             }`}
           >
-            File Complaint
+            Generate Complaint
           </Link>
         </nav>
 
@@ -111,7 +111,7 @@ const Header = () => {
                 }`}
                 onClick={closeMobileMenu}
               >
-                File Complaint
+                Generate Complaint
               </Link>
             </nav>
             

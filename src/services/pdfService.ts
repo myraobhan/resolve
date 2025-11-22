@@ -12,7 +12,6 @@ interface ComplaintFormData {
   totalValue: string;
   productDescription: string;
   transactionDate: string;
-  transactionPlace: string;
   amountPaid: string;
   paymentMode: string;
   issueDescription: string;
@@ -21,7 +20,7 @@ interface ComplaintFormData {
   causeOfActionDate: string;
   causeOfActionPlace: string;
   filingPlace: string;
-  reliefType: string;
+  reliefType: string[];
   reliefAmount: string;
   compensationAmount: string;
   declarationDate: string;
@@ -120,24 +119,46 @@ export const generateComplaintPDF = async (complaintData: ComplaintFormData) => 
   }
 };
 
-const getReliefDescription = (reliefType: string, reliefAmount: string, compensationAmount: string) => {
+const getReliefDescription = (reliefTypes: string[], reliefAmount: string, compensationAmount: string) => {
   const reliefAmountText = reliefAmount ? `₹${reliefAmount}` : '';
   const compensationAmountText = compensationAmount ? `₹${compensationAmount}` : '';
   
-  switch (reliefType) {
-    case 'replacement':
-      return `• Replacement of the product/service of value ${reliefAmountText}${compensationAmountText ? `, and<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss` : ''}`;
-    case 'refund':
-      return `• Refund of ${reliefAmountText}${compensationAmountText ? `, and<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss` : ''}`;
-    case 'return_with_refund':
-      return `• Return of the product and refund of ${reliefAmountText}${compensationAmountText ? `, and<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss` : ''}`;
-    case 'compensation_only':
-      return `• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss`;
-    case 'multiple':
-      return `• Relief as specified: ${reliefAmountText}${compensationAmountText ? `, and<br>• Additional compensation of ${compensationAmountText}` : ''}`;
-    default:
-      return `• Refund of ${reliefAmountText}, or<br>• Replacement of the product/service, or<br>• Compensation of ${compensationAmountText} for inconvenience, mental agony, and loss`;
+  const reliefItems: string[] = [];
+  
+  // Process each selected relief type
+  reliefTypes.forEach((reliefType) => {
+    switch (reliefType) {
+      case 'replacement':
+        reliefItems.push(`• Replacement of the product/service of value ${reliefAmountText}`);
+        break;
+      case 'refund':
+        reliefItems.push(`• Refund of ${reliefAmountText}`);
+        break;
+      case 'return_with_refund':
+        reliefItems.push(`• Return of the product and refund of ${reliefAmountText}`);
+        break;
+      case 'compensation_only':
+        // This will be handled separately if no other relief types
+        break;
+    }
+  });
+  
+  // Add compensation if specified
+  if (compensationAmountText) {
+    reliefItems.push(`• Additional Compensation of ${compensationAmountText} for inconvenience, mental agony etc`);
   }
+  
+  // If only compensation_only is selected
+  if (reliefTypes.length === 1 && reliefTypes[0] === 'compensation_only' && compensationAmountText) {
+    return `• Additional Compensation of ${compensationAmountText} for inconvenience, mental agony etc`;
+  }
+  
+  // If no relief types selected, return default
+  if (reliefItems.length === 0) {
+    return `• Relief as specified: ${reliefAmountText}${compensationAmountText ? `, and<br>• Additional Compensation of ${compensationAmountText} for inconvenience, mental agony etc` : ''}`;
+  }
+  
+  return reliefItems.join('<br>');
 };
 
 const createComplaintHTML = (data: ComplaintFormData, forumName: string, commissionType: string, location: string) => {
@@ -205,7 +226,6 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
           The complainant purchased/availed the following product/service:<br><br>
           <strong>Product/Service Description:</strong> ${data.productDescription}<br>
           <strong>Date of transaction:</strong> ${data.transactionDate}<br>
-          <strong>Place of transaction:</strong> ${data.transactionPlace}<br>
           <strong>Amount paid:</strong> ₹${data.amountPaid}<br>
           <strong>Mode of payment:</strong> ${data.paymentMode}<br><br>
           

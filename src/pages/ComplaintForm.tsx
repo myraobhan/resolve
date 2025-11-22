@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -30,7 +31,6 @@ interface ComplaintFormData {
   totalValue: string;
   productDescription: string;
   transactionDate: string;
-  transactionPlace: string;
   amountPaid: string;
   paymentMode: string;
   issueDescription: string;
@@ -39,7 +39,7 @@ interface ComplaintFormData {
   causeOfActionDate: string;
   causeOfActionPlace: string;
   filingPlace: string;
-  reliefType: string;
+  reliefType: string[];
   reliefAmount: string;
   compensationAmount: string;
   declarationDate: string;
@@ -60,7 +60,6 @@ const ComplaintForm = () => {
     totalValue: "",
     productDescription: "",
     transactionDate: "",
-    transactionPlace: "",
     amountPaid: "",
     paymentMode: "",
     issueDescription: "",
@@ -69,7 +68,7 @@ const ComplaintForm = () => {
     causeOfActionDate: "",
     causeOfActionPlace: "",
     filingPlace: "",
-    reliefType: "",
+    reliefType: [],
     reliefAmount: "",
     compensationAmount: "",
     declarationDate: new Date().toISOString().split("T")[0],
@@ -197,6 +196,28 @@ const ComplaintForm = () => {
     }));
   };
 
+  // Handle relief type checkbox toggle
+  const handleReliefTypeToggle = (reliefTypeValue: string) => {
+    setFormData((prev) => {
+      const currentTypes = prev.reliefType || [];
+      const isSelected = currentTypes.includes(reliefTypeValue);
+      
+      if (isSelected) {
+        // Remove if already selected
+        return {
+          ...prev,
+          reliefType: currentTypes.filter((type) => type !== reliefTypeValue),
+        };
+      } else {
+        // Add if not selected
+        return {
+          ...prev,
+          reliefType: [...currentTypes, reliefTypeValue],
+        };
+      }
+    });
+  };
+
   // Handle state selection
   const handleStateChange = (stateName: string) => {
     const selectedState = states.find(s => s.state_name === stateName);
@@ -257,6 +278,17 @@ const ComplaintForm = () => {
         return false;
       }
     }
+
+    // Validate that at least one relief type is selected
+    if (!formData.reliefType || formData.reliefType.length === 0) {
+      toast({
+        title: "Validation Error",
+        description: "Please select at least one type of relief sought.",
+        variant: "destructive",
+      });
+      return false;
+    }
+
     return true;
   };
 
@@ -561,7 +593,6 @@ const ComplaintForm = () => {
                            <li>• <strong>Date of Transaction:</strong> When you purchased/availed the service</li>
                            <li>• <strong>Date of Cause of Action:</strong> When you first noticed the defect/deficiency</li>
                            <li>• <strong>Rule:</strong> Transaction date must be earlier than cause of action date</li>
-                           <li>• <strong>Minimum Gap:</strong> At least 10 days between transaction and cause of action</li>
                          </ul>
                        </div>
                      </div>
@@ -645,20 +676,6 @@ const ComplaintForm = () => {
                          </SelectContent>
                        </Select>
                      </div>
-                   </div>
-
-                   <div>
-                     <Label htmlFor="transactionPlace">
-                       Place of Transaction *
-                     </Label>
-                     <Input
-                       id="transactionPlace"
-                       value={formData.transactionPlace}
-                       onChange={(e) =>
-                         handleInputChange("transactionPlace", e.target.value)
-                       }
-                       required
-                     />
                    </div>
 
                    <div>
@@ -831,31 +848,75 @@ const ComplaintForm = () => {
                           <li>• <strong>Replacement:</strong> Get a new product/service</li>
                           <li>• <strong>Refund:</strong> Get your money back</li>
                           <li>• <strong>Return with Money Back:</strong> Return product and get refund</li>
-                          <li>• <strong>Compensation:</strong> Additional amount for inconvenience</li>
+                          <li>• <strong>Additional Compensation:</strong> Additional amount for inconvenience, mental agony etc</li>
                         </ul>
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="reliefType">Type of Relief Sought *</Label>
-                    <Select
-                      value={formData.reliefType}
-                      onValueChange={(value) =>
-                        handleInputChange("reliefType", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select the type of relief you are seeking" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="replacement">Replacement of Product/Service</SelectItem>
-                        <SelectItem value="refund">Refund of Amount Paid</SelectItem>
-                        <SelectItem value="return_with_refund">Return of Product with Money Back</SelectItem>
-                        <SelectItem value="compensation_only">Compensation Only</SelectItem>
-                        <SelectItem value="multiple">Multiple Reliefs (specify in amount field)</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label className="text-base font-semibold mb-4 block">
+                      Type of Relief Sought * (Select all that apply)
+                    </Label>
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="relief-replacement"
+                          checked={formData.reliefType.includes("replacement")}
+                          onCheckedChange={() => handleReliefTypeToggle("replacement")}
+                        />
+                        <Label
+                          htmlFor="relief-replacement"
+                          className="text-sm font-normal cursor-pointer"
+                        >
+                          Replacement of Product/Service
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="relief-refund"
+                          checked={formData.reliefType.includes("refund")}
+                          onCheckedChange={() => handleReliefTypeToggle("refund")}
+                        />
+                        <Label
+                          htmlFor="relief-refund"
+                          className="text-sm font-normal cursor-pointer"
+                        >
+                          Refund of Amount Paid
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="relief-return-with-refund"
+                          checked={formData.reliefType.includes("return_with_refund")}
+                          onCheckedChange={() => handleReliefTypeToggle("return_with_refund")}
+                        />
+                        <Label
+                          htmlFor="relief-return-with-refund"
+                          className="text-sm font-normal cursor-pointer"
+                        >
+                          Return of Product with Money Back
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="relief-compensation-only"
+                          checked={formData.reliefType.includes("compensation_only")}
+                          onCheckedChange={() => handleReliefTypeToggle("compensation_only")}
+                        />
+                        <Label
+                          htmlFor="relief-compensation-only"
+                          className="text-sm font-normal cursor-pointer"
+                        >
+                          Additional Compensation Only
+                        </Label>
+                      </div>
+                    </div>
+                    {formData.reliefType.length === 0 && (
+                      <p className="text-xs text-red-600 mt-2">
+                        Please select at least one relief type
+                      </p>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -892,7 +953,7 @@ const ComplaintForm = () => {
                         placeholder="For inconvenience, mental agony, etc."
                       />
                       <p className="text-xs text-muted-foreground mt-1">
-                        Additional amount for inconvenience and mental harassment
+                        Additional amount for inconvenience, mental agony etc
                       </p>
                     </div>
                   </div>
