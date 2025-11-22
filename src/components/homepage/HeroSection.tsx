@@ -11,12 +11,19 @@ const HeroSection = () => {
           <div className="mb-6 sm:mb-8">
             <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white/20 backdrop-blur-sm mb-4 sm:mb-6">
               <Shield className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-              <span className="text-xs sm:text-sm font-medium">Protected by Consumer Protection Act 2019</span>
+              <a 
+                href="https://ncdrc.nic.in/bare_acts/CPA2019.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm font-medium hover:underline cursor-pointer"
+              >
+                Protected by Consumer Protection Act 2019
+              </a>
             </div>
             
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
               Resolve Your Consumer Complaints with 
-              <span className="block text-accent">Confidence</span>
+              <span className="block text-white">Confidence</span>
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 opacity-90 max-w-3xl mx-auto px-2">

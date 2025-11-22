@@ -23,45 +23,19 @@ const Header = () => {
           <span className="text-lg sm:text-xl font-bold text-primary">ConsumerAssist</span>
         </Link>
         
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link 
-            to="/" 
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              location.pathname === "/" ? "text-primary" : "text-muted-foreground"
-            }`}
-          >
-            Home
-          </Link>
-          <Link 
-            to="/chatbot" 
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              location.pathname === "/chatbot" ? "text-primary" : "text-muted-foreground"
-            }`}
-          >
-            AI Assistant
-          </Link>
-          <Link 
-            to="/complaint-form" 
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              location.pathname === "/complaint-form" ? "text-primary" : "text-muted-foreground"
-            }`}
-          >
-            Generate Complaint
-          </Link>
-        </nav>
+       
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/chatbot">
             <Button variant="outline" size="sm">
               <MessageCircle className="mr-2 h-4 w-4" />
-              Get Help
+              AI Assistant
             </Button>
           </Link>
           <Link to="/complaint-form">
             <Button size="sm" className="bg-gradient-primary">
-              Start Complaint
+            Generate Complaint
             </Button>
           </Link>
         </div>

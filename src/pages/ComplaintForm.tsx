@@ -33,6 +33,7 @@ interface ComplaintFormData {
   transactionDate: string;
   amountPaid: string;
   paymentMode: string;
+  transactionPlace: string;
   issueDescription: string;
   communicationAttempts: string;
   supportingDocuments: string;
@@ -62,6 +63,7 @@ const ComplaintForm = () => {
     transactionDate: "",
     amountPaid: "",
     paymentMode: "",
+    transactionPlace: "",
     issueDescription: "",
     communicationAttempts: "",
     supportingDocuments: "",
@@ -673,15 +675,30 @@ const ComplaintForm = () => {
                            </SelectItem>
                            <SelectItem value="Cheque">Cheque</SelectItem>
                            <SelectItem value="Other">Other</SelectItem>
-                         </SelectContent>
-                       </Select>
-                     </div>
-                   </div>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
 
-                   <div>
-                     <Label htmlFor="productDescription">
-                       Product/Service Description *
-                     </Label>
+                  <div>
+                    <Label htmlFor="transactionPlace">
+                      Place of Transaction *
+                    </Label>
+                    <Input
+                      id="transactionPlace"
+                      value={formData.transactionPlace}
+                      onChange={(e) =>
+                        handleInputChange("transactionPlace", e.target.value)
+                      }
+                      required
+                      placeholder="e.g., Mumbai, Maharashtra"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="productDescription">
+                      Product/Service Description *
+                    </Label>
                      <Textarea
                        id="productDescription"
                        value={formData.productDescription}

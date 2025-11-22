@@ -14,6 +14,7 @@ interface ComplaintFormData {
   transactionDate: string;
   amountPaid: string;
   paymentMode: string;
+  transactionPlace: string;
   issueDescription: string;
   communicationAttempts: string;
   supportingDocuments: string;
@@ -227,7 +228,8 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
           <strong>Product/Service Description:</strong> ${data.productDescription}<br>
           <strong>Date of transaction:</strong> ${data.transactionDate}<br>
           <strong>Amount paid:</strong> ₹${data.amountPaid}<br>
-          <strong>Mode of payment:</strong> ${data.paymentMode}<br><br>
+          <strong>Mode of payment:</strong> ${data.paymentMode}<br>
+          <strong>Place of transaction:</strong> ${data.transactionPlace}<br><br>
           
           The complainant experienced the following issue:<br>
           ${data.issueDescription}<br><br>
@@ -247,7 +249,7 @@ const createComplaintHTML = (data: ComplaintFormData, forumName: string, commiss
         </div>
       </div>
 
-      <div style="margin-bottom: 18px; page-break-before: always; margin-top: 60px; page-break-inside: avoid;">
+      <div style="margin-bottom: 18px; page-break-before: always; margin-top: 120px; page-break-inside: avoid;">
         <div style="font-weight: bold; margin-bottom: 6px;">4. Reliefs Sought</div>
         <div style="margin-left: 20px; text-align: justify; line-height: 1.5;">
           The complainant prays for the following reliefs:<br>
