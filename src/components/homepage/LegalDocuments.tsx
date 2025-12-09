@@ -6,7 +6,7 @@ const LegalDocuments = () => {
   const documents = [
     {
       id: "privacy-notice",
-      title: "Privacy Notice - AI Assistant",
+      title: "Consumer Assist’s Privacy Notice - AI Assistant",
       description: "Learn about how we handle your data and privacy when using our AI assistant for consumer complaints.",
       url: "https://docs.google.com/document/d/1oteoqAi7FZ4zwpz46taKR5iaIF5FEHC_/edit?usp=sharing&ouid=101723352975393781795&rtpof=true&sd=true",
       type: "Privacy Policy",
@@ -14,18 +14,10 @@ const LegalDocuments = () => {
     },
     {
       id: "terms-service",
-      title: "Terms of Service",
+      title: "Consumer Assist's Privacy Notice - File Complaint",
       description: "Read our terms and conditions for using the ConsumerAssist platform and services.",
       url: "https://docs.google.com/document/d/1mDOZ2qr9j6CPVoZHZpesslL2NhUlRhIa/edit?usp=sharing&ouid=101723352975393781795&rtpof=true&sd=true",
       type: "Legal Document",
-      icon: FileText
-    },
-    {
-      id: "user-guide",
-      title: "User Guide & Instructions",
-      description: "Comprehensive guide on how to use our platform effectively for filing consumer complaints.",
-      url: "https://docs.google.com/document/d/15YiJoPN9tZVWIu5BPkVBuKuUnxR4iLGB/edit?usp=sharing&ouid=101723352975393781795&rtpof=true&sd=true",
-      type: "User Guide",
       icon: FileText
     }
   ];
@@ -118,8 +110,10 @@ const LegalDocuments = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-          {documents.map(renderCard)}
+        <div className="flex justify-center mt-8 sm:mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl w-full">
+            {documents.map(renderCard)}
+          </div>
         </div>
 
         <div className="mt-8 sm:mt-12 text-center">
