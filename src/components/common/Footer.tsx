@@ -20,8 +20,12 @@ const Footer = () => {
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 <span>Serving consumers across India</span>
               </div>
-              
-              
+              <div className="flex items-center text-xs sm:text-sm text-primary-foreground/80">
+                <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                <a href="mailto:ihaveaconsumercomplaint@gmail.com" className="hover:text-primary-foreground transition-colors">
+                  ihaveaconsumercomplaint@gmail.com
+                </a>
+              </div>
             </div>
           </div>
 
