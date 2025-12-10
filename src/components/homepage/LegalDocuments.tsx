@@ -4,19 +4,12 @@ import { FileText, ExternalLink, Globe, Shield } from "lucide-react";
 
 const LegalDocuments = () => {
   const documents = [
+    
     {
-      id: "privacy-notice",
-      title: "Consumer Assist’s Privacy Notice - AI Assistant",
-      description: "Learn about how we handle your data and privacy when using our AI assistant for consumer complaints.",
-      url: "https://docs.google.com/document/d/1oteoqAi7FZ4zwpz46taKR5iaIF5FEHC_/edit?usp=sharing&ouid=101723352975393781795&rtpof=true&sd=true",
-      type: "Privacy Policy",
-      icon: FileText
-    },
-    {
-      id: "terms-service",
-      title: "Consumer Assist's Privacy Notice - File Complaint",
-      description: "Read our terms and conditions for using the ConsumerAssist platform and services.",
-      url: "https://docs.google.com/document/d/1mDOZ2qr9j6CPVoZHZpesslL2NhUlRhIa/edit?usp=sharing&ouid=101723352975393781795&rtpof=true&sd=true",
+      id: "legal-document",
+      title: "Privacy Policy",
+      description: "Learn about how we collect, use, and protect your personal information when you use our platform and services.",
+      url: "https://docs.google.com/document/d/1EW99ByfYMVPYewNmNzI1IS1cgwp1_Skm/edit?usp=sharing&ouid=108867789058297546033&rtpof=true&sd=true",
       type: "Legal Document",
       icon: FileText
     }
@@ -110,8 +103,8 @@ const LegalDocuments = () => {
           </p>
         </div>
 
-        <div className="flex justify-center mt-8 sm:mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl w-full">
+        <div className="flex justify-center items-center mt-8 sm:mt-12">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 max-w-md w-full justify-items-center">
             {documents.map(renderCard)}
           </div>
         </div>
