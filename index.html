@@ -19,6 +19,28 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        function show(msg) {
+          var el = document.getElementById('__boot_error__');
+          if (!el) {
+            el = document.createElement('pre');
+            el.id = '__boot_error__';
+            el.style.cssText =
+              'position:fixed;inset:0;margin:0;padding:16px;background:#fff;color:#b00020;font:12px/1.4 -apple-system,monospace;white-space:pre-wrap;word-break:break-word;overflow:auto;z-index:2147483647;';
+            document.body.appendChild(el);
+          }
+          el.textContent += msg + '\n\n';
+        }
+        window.addEventListener('error', function (e) {
+          show('JS Error: ' + (e.message || e.error) + '\n' + (e.filename || '') + ':' + (e.lineno || '') + ':' + (e.colno || ''));
+        });
+        window.addEventListener('unhandledrejection', function (e) {
+          var r = e.reason;
+          show('Unhandled rejection: ' + (r && (r.stack || r.message) || r));
+        });
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

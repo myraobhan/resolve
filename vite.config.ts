@@ -19,4 +19,12 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    target: ["es2019", "safari12", "chrome80", "firefox78", "edge88"],
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: "es2019",
+    },
+  },
 }));
