@@ -21,6 +21,17 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     target: ["es2019", "safari12", "chrome80", "firefox78", "edge88"],
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-firebase": ["firebase/app", "firebase/firestore"],
+          "vendor-locations": ["country-state-city"],
+          "vendor-pdf": ["jspdf", "html2canvas"],
+          "vendor-charts": ["recharts"],
+        },
+      },
+    },
   },
   optimizeDeps: {
     esbuildOptions: {
