@@ -4,12 +4,12 @@ import { FileText, ExternalLink, Globe, Shield } from "lucide-react";
 
 const LegalDocuments = () => {
   const documents = [
-    
+
     {
       id: "legal-document",
       title: "Privacy Policy",
       description: "Learn about how we collect, use, and protect your personal information when you use our platform and services.",
-      url: "https://docs.google.com/document/d/1EW99ByfYMVPYewNmNzI1IS1cgwp1_Skm/edit?usp=sharing&ouid=108867789058297546033&rtpof=true&sd=true",
+      url: "https://docs.google.com/document/d/1wQ2PpWYTUNDFQT8CXSfGpSAtaSx41OKXMsBPCsHl8bs/edit?usp=sharing",
       type: "Legal Document",
       icon: FileText
     }
@@ -115,8 +115,8 @@ const LegalDocuments = () => {
               Important Notice
             </h3>
             <p className="text-sm sm:text-base text-muted-foreground">
-              These documents contain important legal information about your rights and our services. 
-              Please read them carefully before using our platform. If you have any questions, 
+              These documents contain important legal information about your rights and our services.
+              Please read them carefully before using our platform. If you have any questions,
               please contact our support team.
             </p>
           </div>
